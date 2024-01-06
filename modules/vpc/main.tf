@@ -40,11 +40,11 @@ resource "aws_subnet" "public1_subnet" {
     Name = "${var.project_name_env}-publicsubnet1"
     "kubernetes.io/role/elb" = "1"
     }  
-  # lifecycle {
-  #   ignore_changes = [
-  #     tags,    
-  # ]  
-  # }
+  lifecycle {
+    ignore_changes = [
+      tags,    
+  ]  
+  }
 }
 
 #creation of public subnet2
@@ -58,11 +58,11 @@ resource "aws_subnet" "public2_subnet" {
     Name = "${var.project_name_env}-publicsubnet2"
     "kubernetes.io/role/elb" = "1"
   }
-  # lifecycle {
-  #   ignore_changes = [
-  #     tags,    
-  # ]  
-  # }
+  lifecycle {
+    ignore_changes = [
+      tags,    
+  ]  
+  }
 }
 
 #creation of private subnet1
@@ -91,11 +91,11 @@ resource "aws_subnet" "private2_subnet" {
   tags = {
     Name = "${var.project_name_env}-privatesubnet2"
   }
-  # lifecycle {
-  #   ignore_changes = [
-  #     tags,    
-  # ]  
-  # }
+  lifecycle {
+    ignore_changes = [
+      tags,    
+  ]  
+  }
 }
 
 #routing table association for public subnet1
