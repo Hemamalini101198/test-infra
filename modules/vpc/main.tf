@@ -140,6 +140,9 @@ resource "aws_route_table" "private" {
   tags = {
     Name = "${var.project_name_env}-privatesubnet-rt"
   }
+  lifecycle {
+    ignore_changes = [ route, ]
+  }
 }
 
 resource "aws_route_table_association" "private_association1" {
