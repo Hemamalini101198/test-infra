@@ -29,29 +29,17 @@ resource "aws_iam_policy" "eks_cluster_autoscaler" {
     Statement = [
       {
         Action = [
-          "autoscaling:DescribeAutoScalingInstances",
           "autoscaling:DescribeAutoScalingGroups",
-          "ec2:DescribeLaunchTemplateVersions",
-          "autoscaling:DescribeTags",
+          "autoscaling:DescribeAutoScalingInstances",
           "autoscaling:DescribeLaunchConfigurations",
-          "ec2:DescribeInstanceTypes",
+          "autoscaling:DescribeTags",
+          "autoscaling:SetDesiredCapacity",
+          "autoscaling:TerminateInstanceInAutoScalingGroup",
+          "ec2:DescribeLaunchTemplateVersions"
         ]
         Effect   = "Allow"
         Resource = "*"
       },
-      {
-        Action = [
-          "autoscaling:SetDesiredCapacity",
-          "autoscaling:TerminateInstanceInAutoScalingGroup",
-        ]
-        Effect = "Allow"
-        Resource = "*"
-        Condition = {
-          "StringEquals" = {
-            "aws:ResourceTag/k8s.io/cluster-autoscaler/${var.cluster_name}": "owned"
-          }
-        }
-      }
     ]
     Version = "2012-10-17"
   })
