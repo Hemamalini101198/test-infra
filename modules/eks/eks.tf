@@ -81,6 +81,10 @@ resource "aws_eks_node_group" "eks_node_group" {
     max_size     = var.max_nodes
   }
 
+  # lifecycle {
+  #   ignore_changes = [ scaling_config[0].desired_size ]
+  # }
+   
   node_role_arn          = aws_iam_role.eks_node_group.arn
 
   instance_types = [var.instance_types]
