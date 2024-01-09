@@ -83,7 +83,7 @@ resource "aws_eks_node_group" "eks_node_group_services" {
 
   node_role_arn          = aws_iam_role.eks_node_group.arn
 
-  instance_types = [var.instance_types]
+  instance_types = [var.service_instance_types]
   capacity_type  = var.capacity_type
   ami_type = var.ami_type
 
@@ -115,7 +115,7 @@ resource "aws_eks_node_group" "eks_node_group_data" {
 
   node_role_arn          = aws_iam_role.eks_node_group.arn
 
-  instance_types = [var.instance_types]
+  instance_types = [var.data_instance_types]
   capacity_type  = var.capacity_type
   ami_type = var.ami_type
 
