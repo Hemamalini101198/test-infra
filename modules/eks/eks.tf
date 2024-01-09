@@ -70,33 +70,61 @@ resource "aws_iam_role_policy_attachment" "nodes-AmazonEC2ContainerRegistryReadO
   role       = aws_iam_role.eks_node_group.name
 }
 
-# EKS Managed Node Group
-resource "aws_eks_node_group" "eks_node_group" {
+# EKS Managed Node Group - Services
+resource "aws_eks_node_group" "eks_node_group_services" {
   cluster_name    = var.cluster_name
-  node_group_name = var.eks-node
+  node_group_name = "idz-services"
   subnet_ids      = [var.private1_subnet_id, var.private2_subnet_id]
   scaling_config {
-    desired_size = var.desired_nodes    
-    min_size     = var.min_nodes
+    desired_size = 1
+    min_size     = 1
     max_size     = var.max_nodes
   }
 
-  lifecycle {
-    ignore_changes = [ scaling_config[0].desired_size ]
-  }
-   
   node_role_arn          = aws_iam_role.eks_node_group.arn
 
   instance_types = [var.instance_types]
   capacity_type  = var.capacity_type
   ami_type = var.ami_type
 
-  # labels = {
-  #   role = "managed-nodes"
-  # }
+  labels = {
+    role = "services"
+  }
+  tags = {
+    name = "${var.project_name_env}-eks-worker-node-services"
+  }
+
+  depends_on = [
+    aws_iam_role_policy_attachment.nodes-AmazonEKSWorkerNodePolicy,
+    aws_iam_role_policy_attachment.nodes-AmazonEKS_CNI_Policy,
+    aws_iam_role_policy_attachment.nodes-AmazonEC2ContainerRegistryReadOnly,
+    aws_eks_cluster.eks,
+  ]
+}
+
+# EKS Managed Node Group - Data
+resource "aws_eks_node_group" "eks_node_group_data" {
+  cluster_name    = var.cluster_name
+  node_group_name = "idz-data-scrapping"
+  subnet_ids      = [var.private1_subnet_id, var.private2_subnet_id]
+  scaling_config {
+    desired_size = 0
+    min_size     = 0
+    max_size     = var.max_nodes
+  }
+
+  node_role_arn          = aws_iam_role.eks_node_group.arn
+
+  instance_types = [var.instance_types]
+  capacity_type  = var.capacity_type
+  ami_type = var.ami_type
+
+  labels = {
+    role = "data-scrapping"
+  }
 
   tags = {
-    name = "${var.project_name_env}-eks-worker-node"
+    name = "${var.project_name_env}-eks-worker-node-data-scrapping"
   }
   
   depends_on = [
