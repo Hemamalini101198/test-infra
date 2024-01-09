@@ -14,13 +14,9 @@ module "eks"{
     source = "./modules/eks"
     region = var.region
     cluster_name = var.cluster_name
-    eks-node = var.eks-node
-    # sg_id = module.vpc.sg_id
     private1_subnet_id = module.vpc.private1_subnet_id
     private2_subnet_id = module.vpc.private2_subnet_id
     vpc_id = module.vpc.vpc_id
-    desired_nodes = var.desired_nodes
-    min_nodes = var.min_nodes
     max_nodes = var.max_nodes
     project_name_env = var.project_name_env
     data_instance_types = var.data_instance_types
