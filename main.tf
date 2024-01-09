@@ -23,7 +23,8 @@ module "eks"{
     min_nodes = var.min_nodes
     max_nodes = var.max_nodes
     project_name_env = var.project_name_env
-    instance_types = var.instance_types
+    data_instance_types = var.data_instance_types
+    service_instance_types = var.service_instance_types
     capacity_type = var.capacity_type
     ami_type = var.ami_type
     public_subnets = [module.vpc.public1_subnet_id, module.vpc.public2_subnet_id]
