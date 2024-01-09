@@ -58,8 +58,11 @@ variable "max_nodes" {
   type        = number
 }
 
+variable "service_instance_types" {
+  type = string
+}
 
-variable "instance_types" {
+variable "data_instance_types" {
   type = string
 }
 
