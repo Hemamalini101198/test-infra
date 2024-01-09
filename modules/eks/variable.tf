@@ -7,12 +7,6 @@ variable "cluster_name" {
   type        = string
 }
 
-variable "eks-node" {
-  description = "Name for the EKS eks node group"
-  type        = string
-}
-
-
 variable "private1_subnet_id" {
   description = "List of subnet IDs for the EKS cluster"
   type        = string
