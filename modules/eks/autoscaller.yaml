@@ -5,7 +5,7 @@ metadata:
     k8s-addon: cluster-autoscaler.addons.k8s.io
     k8s-app: cluster-autoscaler
   annotations:
-    eks.amazonaws.com/role-arn: arn:aws:iam::340539263267:role/eks-cluster-autoscaler
+    eks.amazonaws.com/role-arn: arn:aws:iam::701829533401:role/eks-cluster-autoscaler
   name: cluster-autoscaler
   namespace: kube-system
 
@@ -156,12 +156,12 @@ spec:
             - --cloud-provider=aws
             - --skip-nodes-with-local-storage=false
             - --expander=least-waste
-            - --node-group-auto-discovery=asg:tag=k8s.io/cluster-autoscaler/enabled,k8s.io/cluster-autoscaler/tftest-cluster
+            - --node-group-auto-discovery=asg:tag=k8s.io/cluster-autoscaler/enabled,k8s.io/cluster-autoscaler/idolize-prod
             - --balance-similar-node-groups
             - --skip-nodes-with-system-pods=false
           volumeMounts:
             - name: ssl-certs
-              mountPath: /etc/ssl/certs/ca-certificates.crt #/etc/ssl/certs/ca-bundle.crt for Amazon Linux Worker Nodes
+              mountPath: /etc/ssl/certs/ca-certificates.crt 
               readOnly: true
           imagePullPolicy: "Always"
       volumes:
