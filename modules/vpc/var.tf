@@ -1,3 +1,7 @@
+variable "region" {
+  description = "Region of the VPC"
+  type        = string
+}
 
 variable "vpc_name" {
   description = "Name for the VPC"
