@@ -66,7 +66,11 @@ variable "project_name_env" {
   type        = string  
 }
 
-variable "instance_types" {
+variable "service_instance_types" {
+  type = string
+}
+
+variable "data_instance_types" {
   type = string
 }
 
