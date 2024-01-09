@@ -12,9 +12,6 @@ variable "eks-node" {
   type        = string
 }
 
-# variable "sg_id" {
-#   type = string  
-# }
 
 variable "private1_subnet_id" {
   description = "List of subnet IDs for the EKS cluster"
@@ -43,17 +40,6 @@ variable "vpc_id" {
 variable "public_subnets" {
   description = "List of public subnet IDs"
   type        = list(string)
-}
-
-
-variable "desired_nodes" {
-  description = "Number of managed node desired size"
-  type        = number
-}
-
-variable "min_nodes" {
-  description = "Number of managed node minimum size"
-  type        = number
 }
 
 variable "max_nodes" {
