@@ -7,6 +7,7 @@ module "vpc"{
     private1_subnet_cidr = var.private1_subnet_cidr
     private2_subnet_cidr = var.private2_subnet_cidr
     project_name_env = var.project_name_env
+    region = var.region
 }
 
 module "eks"{
