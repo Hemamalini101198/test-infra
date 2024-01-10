@@ -86,6 +86,7 @@ resource "aws_eks_node_group" "eks_node_group_services" {
   instance_types = [var.service_instance_types]
   capacity_type  = var.capacity_type
   ami_type = var.ami_type
+  disk_size=100
 
   labels = {
     role = "services"
@@ -118,6 +119,7 @@ resource "aws_eks_node_group" "eks_node_group_data" {
   instance_types = [var.data_instance_types]
   capacity_type  = var.capacity_type
   ami_type = var.ami_type
+  disk_size=100
 
   labels = {
     role = "data-scrapping"
